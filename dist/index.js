@@ -1,14 +1,5 @@
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define([], factory);
-	else if(typeof exports === 'object')
-		exports["Wrapper"] = factory();
-	else
-		root["Wrapper"] = factory();
-})(window, function() {
-return /******/ (function(modules) { // webpackBootstrap
+var Wrapper =
+/******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -140,4 +131,3 @@ function postMessagePortail(msg) {
 
 /***/ })
 /******/ ]);
-});
