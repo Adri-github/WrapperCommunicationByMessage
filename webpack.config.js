@@ -43,7 +43,7 @@ const config = {
     output: {
         path: resolve(__dirname, 'dist'),
         filename: 'index.js',
-        libraryTarget: 'window',
+        libraryTarget: 'umd',
         //library: 'Wrapper'
     }
     //output: {
