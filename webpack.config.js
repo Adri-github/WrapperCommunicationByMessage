@@ -43,8 +43,8 @@ const config = {
     output: {
         path: resolve(__dirname, 'dist'),
         filename: 'index.js',
-        libraryTarget: 'var',
-        library: 'Wrapper'
+        libraryTarget: 'window',
+        //library: 'Wrapper'
     }
     //output: {
     //    path: resolve(__dirname, 'dist'),
