@@ -39,8 +39,19 @@ const config = {
     resolve: {
         extensions: ['.js', '.ts', '.tsx']
 
+    },
+    output: {
+        path: resolve(__dirname, 'dist'),
+        filename: 'index.js',
+        libraryTarget: 'umd',
+        library: 'Wrapper'
     }
-    //,
+    //output: {
+    //    path: resolve(__dirname, 'dist'),
+    //    filename: 'yourlib.js',
+    //    libraryTarget: 'var',
+    //    library: 'EntryPoint'
+    //}
     //plugins: [
     //    new HtmlWebPackPlugin({
     //        template: './src/index.html',
