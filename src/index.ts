@@ -61,6 +61,7 @@ export class Channel {
                     const accuse: AccuseReception = event.data;        
                     console.log(accuse);
                 } else {
+                    console.log('ghikggugjgjfgjhjjgujg');
                     const msg: Message = event.data;
 
                     if (this._type === msg.destinataire) {

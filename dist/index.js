@@ -154,6 +154,7 @@ class Channel {
                 console.log(accuse);
             }
             else {
+                console.log('ghikggugjgjfgjhjjgujg');
                 const msg = event.data;
                 if (this._type === msg.destinataire) {
                     //Le message est pour moi j'execute la fonction de callback
