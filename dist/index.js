@@ -154,7 +154,6 @@ class Channel {
                 console.log(accuse);
             }
             else {
-                console.log('ghikggugjgjfgjhjjgujg');
                 const msg = event.data;
                 if (this._type === msg.destinataire) {
                     //Le message est pour moi j'execute la fonction de callback
@@ -164,12 +163,11 @@ class Channel {
                 else {
                     //Le message n'est pas pour moi
                     //Je le redistribue
-                    console.log('this._slaves', this._slaves);
                     const slaveDestinataire = this._slaves.find(x => x.type === msg.destinataire);
-                    console.log('slaveDestinataire', slaveDestinataire);
                     if (slaveDestinataire) {
                         //J'ai bien un esclave qui correspond au destinataire du message
                         //Je lui passe le message
+                        console.log('document.referrer', document.referrer);
                         slaveDestinataire.elementHtmlIframe.contentWindow.postMessage(msg, '*' /*document.referrer*/);
                     }
                     else {
