@@ -169,7 +169,8 @@ class Channel {
                     if (slaveDestinataire) {
                         //J'ai bien un esclave qui correspond au destinataire du message
                         //Je lui passe le message
-                        console.log('document.referrer', window.document);
+                        console.log('document.referrer', slaveDestinataire.elementHtmlIframe.getAttribute('scr'));
+                        slaveDestinataire.elementHtmlIframe.contentWindow.postMessage(msg, slaveDestinataire.elementHtmlIframe.getAttribute('scr') /*'*' document.referrer*/);
                         if (msg.destinataire === TypeEmetteurDestinataire.DESMOS) {
                             slaveDestinataire.elementHtmlIframe.contentWindow.postMessage(msg, 'http://localhost:65008' /*'*' document.referrer*/);
                         }
