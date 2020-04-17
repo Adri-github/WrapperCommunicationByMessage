@@ -145,7 +145,7 @@ class Channel {
     constructor(type, callback, listSlaveElement) {
         this._type = type;
         this._url = document.referrer;
-        console.log('document._yrl', this._url);
+        console.log('document._yrl', window.document);
         if (listSlaveElement) {
             this._slaves = listSlaveElement;
         }

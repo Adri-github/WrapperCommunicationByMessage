@@ -51,7 +51,7 @@ export class Channel {
     constructor(type: TypeEmetteurDestinataire, callback: (message: Message ) => any, listSlaveElement?: Array<Slave>) {
         this._type = type;
         this._url = document.referrer;
-        console.log('document._yrl', this._url)
+        console.log('document._yrl', window.document)
         if (listSlaveElement) {
             this._slaves = listSlaveElement;
         }
