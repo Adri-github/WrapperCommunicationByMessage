@@ -78,13 +78,13 @@ export class Channel {
                             //J'ai bien un esclave qui correspond au destinataire du message
                             //Je lui passe le message
 
-                            console.log('document.referrer', slaveDestinataire.elementHtmlIframe.getAttribute('scr'));
-                            slaveDestinataire.elementHtmlIframe.contentWindow.postMessage(msg, slaveDestinataire.elementHtmlIframe.getAttribute('scr')/*'*' document.referrer*/);
-                            if (msg.destinataire === TypeEmetteurDestinataire.DESMOS) {
-                                slaveDestinataire.elementHtmlIframe.contentWindow.postMessage(msg, 'http://localhost:65008'/*'*' document.referrer*/);
-                            } else {
-                                slaveDestinataire.elementHtmlIframe.contentWindow.postMessage(msg, 'http://localhost:65000' /*'*' document.referrer*/);
-                            }
+                            console.log('document.referrer', slaveDestinataire.elementHtmlIframe.src);
+                            slaveDestinataire.elementHtmlIframe.contentWindow.postMessage(msg, slaveDestinataire.elementHtmlIframe.src /*'*' document.referrer*/);
+                            //if (msg.destinataire === TypeEmetteurDestinataire.DESMOS) {
+                            //    slaveDestinataire.elementHtmlIframe.contentWindow.postMessage(msg, 'http://localhost:65008'/*'*' document.referrer*/);
+                            //} else {
+                            //    slaveDestinataire.elementHtmlIframe.contentWindow.postMessage(msg, 'http://localhost:65000' /*'*' document.referrer*/);
+                            //}
                             
                         } else {
                             //J'ai pas d'esclave correspondant
