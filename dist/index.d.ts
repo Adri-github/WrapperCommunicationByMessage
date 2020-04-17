@@ -30,6 +30,7 @@ export declare enum TypeChannel {
 export declare class Channel {
     private _type;
     private _slaves?;
+    private _url;
     constructor(type: TypeEmetteurDestinataire, callback: (message: Message) => any, listSlaveElement?: Array<Slave>);
     get slaves(): Slave[];
     publish(message: (Message | AccuseReception)): void;

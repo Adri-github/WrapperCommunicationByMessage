@@ -144,6 +144,8 @@ var TypeChannel;
 class Channel {
     constructor(type, callback, listSlaveElement) {
         this._type = type;
+        this._url = document.referrer;
+        console.log('document._yrl', this._url);
         if (listSlaveElement) {
             this._slaves = listSlaveElement;
         }
@@ -167,7 +169,7 @@ class Channel {
                     if (slaveDestinataire) {
                         //J'ai bien un esclave qui correspond au destinataire du message
                         //Je lui passe le message
-                        console.log('document.referrer', document.referrer);
+                        console.log('document.referrer', this._url);
                         slaveDestinataire.elementHtmlIframe.contentWindow.postMessage(msg, '*' /*document.referrer*/);
                     }
                     else {

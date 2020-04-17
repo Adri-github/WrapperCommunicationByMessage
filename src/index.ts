@@ -46,9 +46,12 @@ export enum TypeChannel {
 export class Channel {
     private _type: TypeEmetteurDestinataire;
     private _slaves?: Array<Slave>;
+    private _url: string;
 
     constructor(type: TypeEmetteurDestinataire, callback: (message: Message ) => any, listSlaveElement?: Array<Slave>) {
         this._type = type;
+        this._url = document.referrer;
+        console.log('document._yrl', this._url)
         if (listSlaveElement) {
             this._slaves = listSlaveElement;
         }
@@ -74,7 +77,8 @@ export class Channel {
                         if (slaveDestinataire) {
                             //J'ai bien un esclave qui correspond au destinataire du message
                             //Je lui passe le message
-                            console.log('document.referrer', document.referrer)
+
+                            console.log('document.referrer', this._url);
                             slaveDestinataire.elementHtmlIframe.contentWindow.postMessage(msg, '*' /*document.referrer*/);
                         } else {
                             //J'ai pas d'esclave correspondant
