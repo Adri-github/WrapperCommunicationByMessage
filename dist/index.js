@@ -152,6 +152,7 @@ class Channel {
             if (event.data.isAccuse) {
                 const accuse = event.data;
                 console.log(accuse);
+                //TODO
             }
             else {
                 const msg = event.data;
@@ -167,8 +168,7 @@ class Channel {
                     if (slaveDestinataire) {
                         //J'ai bien un esclave qui correspond au destinataire du message
                         //Je lui passe le message
-                        console.log('slaveDestinataire.elementHtmlIframe.src', slaveDestinataire.elementHtmlIframe.src.replace('65000', '65008'));
-                        slaveDestinataire.elementHtmlIframe.contentWindow.postMessage(msg, slaveDestinataire.elementHtmlIframe.src.replace('65000', '65008') /*'*' document.referrer*/);
+                        slaveDestinataire.elementHtmlIframe.contentWindow.postMessage(msg, slaveDestinataire.elementHtmlIframe.src);
                     }
                     else {
                         //J'ai pas d'esclave correspondant
