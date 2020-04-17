@@ -51,7 +51,7 @@ export class Channel {
     constructor(type: TypeEmetteurDestinataire, callback: (message: Message ) => any, listSlaveElement?: Array<Slave>) {
         this._type = type;
         this._url = document.referrer;
-        console.log('document._yrl', window.document.referrer)
+        console.log('document._yrl', window.document.location)
         if (listSlaveElement) {
             this._slaves = listSlaveElement;
         }
@@ -78,7 +78,7 @@ export class Channel {
                             //J'ai bien un esclave qui correspond au destinataire du message
                             //Je lui passe le message
 
-                            console.log('document.referrer', window.document.referrer);
+                            console.log('document.referrer', window.document);
                             slaveDestinataire.elementHtmlIframe.contentWindow.postMessage(msg, '*' /*document.referrer*/);
                         } else {
                             //J'ai pas d'esclave correspondant
