@@ -163,7 +163,9 @@ class Channel {
                 else {
                     //Le message n'est pas pour moi
                     //Je le redistribue
+                    console.log('this._slaves', this._slaves);
                     const slaveDestinataire = this._slaves.find(x => x.type === msg.destinataire);
+                    console.log('slaveDestinataire', slaveDestinataire);
                     if (slaveDestinataire) {
                         //J'ai bien un esclave qui correspond au destinataire du message
                         //Je lui passe le message
