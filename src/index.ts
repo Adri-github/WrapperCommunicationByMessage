@@ -75,19 +75,9 @@ export class Channel {
                             //J'ai bien un esclave qui correspond au destinataire du message
                             //Je lui passe le message
 
-                            if (event.origin !== slaveDestinataire.elementHtmlIframe.src) {
-                                console.log('origine du message erreur');
-                                console.log('event.origin', event.origin);
-                                console.log('slaveDestinataire.elementHtmlIframe.src', slaveDestinataire.elementHtmlIframe.src);
-                                return;
-                            }
-                            console.log('document.referrer', slaveDestinataire.elementHtmlIframe.src);
+                            console.log('slaveDestinataire.elementHtmlIframe.src', slaveDestinataire.elementHtmlIframe.src);
                             slaveDestinataire.elementHtmlIframe.contentWindow.postMessage(msg, slaveDestinataire.elementHtmlIframe.src /*'*' document.referrer*/);
-                            //if (msg.destinataire === TypeEmetteurDestinataire.DESMOS) {
-                            //    slaveDestinataire.elementHtmlIframe.contentWindow.postMessage(msg, 'http://localhost:65008'/*'*' document.referrer*/);
-                            //} else {
-                            //    slaveDestinataire.elementHtmlIframe.contentWindow.postMessage(msg, 'http://localhost:65000' /*'*' document.referrer*/);
-                            //}
+                           
                             
                         } else {
                             //J'ai pas d'esclave correspondant
