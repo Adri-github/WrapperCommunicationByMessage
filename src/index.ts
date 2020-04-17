@@ -47,7 +47,7 @@ export class Channel {
     private _type: TypeEmetteurDestinataire;
     private _slaves?: Array<Slave>;
 
-    constructor(type: TypeEmetteurDestinataire, callback: (message: (Message | AccuseReception)) => any, listSlaveElement?: Array<Slave>) {
+    constructor(type: TypeEmetteurDestinataire, callback: (message: Message ) => any, listSlaveElement?: Array<Slave>) {
         this._type = type;
         if (listSlaveElement) {
             this._slaves = listSlaveElement;
@@ -58,8 +58,8 @@ export class Channel {
             
 
                 if (event.data.isAccuse) {
-                    const msg: AccuseReception = event.data;        
-                    console.log(msg);
+                    const accuse: AccuseReception = event.data;        
+                    console.log(accuse);
                 } else {
                     const msg: Message = event.data;
 

@@ -150,8 +150,8 @@ class Channel {
         window.addEventListener('message', (event) => {
             console.log("receive:", event);
             if (event.data.isAccuse) {
-                const msg = event.data;
-                console.log(msg);
+                const accuse = event.data;
+                console.log(accuse);
             }
             else {
                 const msg = event.data;
