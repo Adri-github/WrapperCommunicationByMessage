@@ -92,11 +92,11 @@ export class Channel {
         return this._slaves;
     }
 
-
-    public publish(message: (Message | AccuseReception)) {
+    publish(message: (Message | AccuseReception)) {
         console.log('publish message', message);
         window.top.postMessage(message, document.referrer);
     }
+   
 };
 
 

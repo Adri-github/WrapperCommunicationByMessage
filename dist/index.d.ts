@@ -32,6 +32,6 @@ export declare class Channel {
     private _slaves?;
     constructor(type: TypeEmetteurDestinataire, callback: (message: (Message | AccuseReception)) => any, listSlaveElement?: Array<Slave>);
     get slaves(): Slave[];
-    static publish(message: (Message | AccuseReception)): void;
+    publish(message: (Message | AccuseReception)): void;
 }
 export declare function postMessagePortail(msg: Message): void;
