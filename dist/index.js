@@ -180,6 +180,10 @@ class Channel {
     get slaves() {
         return this._slaves;
     }
+    static publish(message) {
+        console.log('publish message', message);
+        window.top.postMessage(message, document.referrer);
+    }
 }
 ;
 function postMessagePortail(msg) {
