@@ -170,7 +170,7 @@ class Channel {
                     if (slaveDestinataire) {
                         //J'ai bien un esclave qui correspond au destinataire du message
                         //Je lui passe le message
-                        slaveDestinataire.elementHtmlIframe.contentWindow.postMessage(msg, document.referrer);
+                        slaveDestinataire.elementHtmlIframe.contentWindow.postMessage(msg, '*' /*document.referrer*/);
                     }
                     else {
                         //J'ai pas d'esclave correspondant
