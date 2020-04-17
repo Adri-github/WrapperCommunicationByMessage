@@ -79,7 +79,12 @@ export class Channel {
                             //Je lui passe le message
 
                             console.log('document.referrer', window.document);
-                            slaveDestinataire.elementHtmlIframe.contentWindow.postMessage(msg, '*' /*document.referrer*/);
+                            if (msg.destinataire === TypeEmetteurDestinataire.DESMOS) {
+                                slaveDestinataire.elementHtmlIframe.contentWindow.postMessage(msg, 'http://localhost:65008'/*'*' document.referrer*/);
+                            } else {
+                                slaveDestinataire.elementHtmlIframe.contentWindow.postMessage(msg, 'http://localhost:65000' /*'*' document.referrer*/);
+                            }
+                            
                         } else {
                             //J'ai pas d'esclave correspondant
                             //TODO je fais quoi
