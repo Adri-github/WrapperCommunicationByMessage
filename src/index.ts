@@ -1,3 +1,8 @@
+export class Slave {
+    type: TypeEmetteurDestinataire;
+    elementHtmlIframe: HTMLIFrameElement;
+};
+
 export class Message {
     guid: string;
     dateEnvoi: string;
@@ -5,6 +10,7 @@ export class Message {
     emetteur: TypeEmetteurDestinataire;
     destinataire: TypeEmetteurDestinataire;
     type: string;
+    payload: any;
 
     constructor() {
         const u = Date.now().toString(16) + Math.random().toString(16) + '0'.repeat(16);
@@ -32,7 +38,66 @@ export enum TypeEmetteurDestinataire {
     MEDAPLIX = 'MEDAPLIX'
 };
 
-export function postMessagePortail(msg: Message) {
+export enum TypeChannel {
+    MASTER = 'MASTER',    
+    SLAVE = 'SLAVE'
+};
+
+export class Channel {
+    private _type: TypeEmetteurDestinataire;
+    private _slaves?: Array<Slave>;
+
+    constructor(type: TypeEmetteurDestinataire, callback: (message: (Message | AccuseReception)) => any, listSlaveElement?: Array<Slave>) {
+        this._type = type;
+        if (listSlaveElement) {
+            this._slaves = listSlaveElement;
+        }
+
+        window.addEventListener('message', (event: MessageEvent) => {
+                console.log("receive:", event);
+            
+
+                if (event.data.isAccuse) {
+                    const msg: AccuseReception = event.data;        
+                    console.log(msg);
+                } else {
+                    const msg: Message = event.data;
+
+                    if (this._type === msg.destinataire) {
+                        //Le message est pour moi j'execute la fonction de callback
+                        callback(msg);
+                        return;
+                    } else {
+                        //Le message n'est pas pour moi
+                        //Je le redistribue
+
+                        const slaveDestinataire = this._slaves.find(x => x.type === msg.destinataire);
+                        if (slaveDestinataire) {
+                            //J'ai bien un esclave qui correspond au destinataire du message
+                            //Je lui passe le message
+                            slaveDestinataire.elementHtmlIframe.contentWindow.postMessage(msg, document.referrer);
+                        } else {
+                            //J'ai pas d'esclave correspondant
+                            //TODO je fais quoi
+
+                        }
+                    }
+                }
+            },
+            false
+        );
+    }
+
+    get slaves() {
+        return this._slaves;
+    }
+
+};
+
+
+
+
+    export function postMessagePortail(msg: Message) {
     console.log('postMessagePortail');
     console.log(msg);
     console.log(document.referrer);

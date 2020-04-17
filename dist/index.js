@@ -100,10 +100,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Slave", function() { return Slave; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Message", function() { return Message; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AccuseReception", function() { return AccuseReception; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TypeEmetteurDestinataire", function() { return TypeEmetteurDestinataire; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TypeChannel", function() { return TypeChannel; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Channel", function() { return Channel; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postMessagePortail", function() { return postMessagePortail; });
+class Slave {
+}
+;
 class Message {
     constructor() {
         const u = Date.now().toString(16) + Math.random().toString(16) + '0'.repeat(16);
@@ -128,6 +134,53 @@ var TypeEmetteurDestinataire;
     TypeEmetteurDestinataire["DESMOS"] = "DESMOS";
     TypeEmetteurDestinataire["MEDAPLIX"] = "MEDAPLIX";
 })(TypeEmetteurDestinataire || (TypeEmetteurDestinataire = {}));
+;
+var TypeChannel;
+(function (TypeChannel) {
+    TypeChannel["MASTER"] = "MASTER";
+    TypeChannel["SLAVE"] = "SLAVE";
+})(TypeChannel || (TypeChannel = {}));
+;
+class Channel {
+    constructor(type, callback, listSlaveElement) {
+        this._type = type;
+        if (listSlaveElement) {
+            this._slaves = listSlaveElement;
+        }
+        window.addEventListener('message', (event) => {
+            console.log("receive:", event);
+            if (event.data.isAccuse) {
+                const msg = event.data;
+                console.log(msg);
+            }
+            else {
+                const msg = event.data;
+                if (this._type === msg.destinataire) {
+                    //Le message est pour moi j'execute la fonction de callback
+                    callback(msg);
+                    return;
+                }
+                else {
+                    //Le message n'est pas pour moi
+                    //Je le redistribue
+                    const slaveDestinataire = this._slaves.find(x => x.type === msg.destinataire);
+                    if (slaveDestinataire) {
+                        //J'ai bien un esclave qui correspond au destinataire du message
+                        //Je lui passe le message
+                        slaveDestinataire.elementHtmlIframe.contentWindow.postMessage(msg, document.referrer);
+                    }
+                    else {
+                        //J'ai pas d'esclave correspondant
+                        //TODO je fais quoi
+                    }
+                }
+            }
+        }, false);
+    }
+    get slaves() {
+        return this._slaves;
+    }
+}
 ;
 function postMessagePortail(msg) {
     console.log('postMessagePortail');
