@@ -167,8 +167,8 @@ class Channel {
                     if (slaveDestinataire) {
                         //J'ai bien un esclave qui correspond au destinataire du message
                         //Je lui passe le message
-                        console.log('slaveDestinataire.elementHtmlIframe.src', slaveDestinataire.elementHtmlIframe.src);
-                        slaveDestinataire.elementHtmlIframe.contentWindow.postMessage(msg, slaveDestinataire.elementHtmlIframe.src /*'*' document.referrer*/);
+                        console.log('slaveDestinataire.elementHtmlIframe.src', slaveDestinataire.elementHtmlIframe.src.replace('65000', '65008'));
+                        slaveDestinataire.elementHtmlIframe.contentWindow.postMessage(msg, slaveDestinataire.elementHtmlIframe.src.replace('65000', '65008') /*'*' document.referrer*/);
                     }
                     else {
                         //J'ai pas d'esclave correspondant
